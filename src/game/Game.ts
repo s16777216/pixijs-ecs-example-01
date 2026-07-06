@@ -19,7 +19,8 @@ export class Game {
     this.renderer = new GameRenderer(800, 600);
   }
 
-  init(playerID: number) {
+  async init(playerID: number) {
+    await this.renderer.init(800, 600);
     // 2.1 Register systems in correct order
     this.systemManager.registerSystem(new JumpSystem());
     this.systemManager.registerSystem(new MovementSystem());

@@ -6,15 +6,15 @@ export class GameRenderer {
 
   constructor(width: number, height: number) {
     this.app = new PIXI.Application();
-    // Assuming v7+ compatible initialization if app.init isn't available
-    // or just using the constructor. Let's try standard v7 for now.
-    // If it's v8, this might need app.init. 
-    // Given the error was about 0 args, adding the constructor solves that.
-    this.app.init({ width, height, backgroundColor: 0x1099bb }).then(() => {
-        document.body.appendChild(this.app.canvas);
-    });
     
+    // We defer the init to main.ts to ensure everything is ready
     this.worldContainer = new PIXI.Container();
+    // this.app.stage.addChild(this.worldContainer); // Need to wait for init
+  }
+
+  async init(width: number, height: number) {
+    await this.app.init({ width, height, backgroundColor: 0x1099bb });
+    document.body.appendChild(this.app.canvas);
     this.app.stage.addChild(this.worldContainer);
   }
 
