@@ -10,7 +10,9 @@ export class GameRenderer {
     // or just using the constructor. Let's try standard v7 for now.
     // If it's v8, this might need app.init. 
     // Given the error was about 0 args, adding the constructor solves that.
-    this.app.init({ width, height, backgroundColor: 0x1099bb });
+    this.app.init({ width, height, backgroundColor: 0x1099bb }).then(() => {
+        document.body.appendChild(this.app.canvas);
+    });
     
     this.worldContainer = new PIXI.Container();
     this.app.stage.addChild(this.worldContainer);
